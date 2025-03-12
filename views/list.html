@@ -1,0 +1,11 @@
+{{ define "list" }}
+
+{{template "header" .}}
+<ul>
+    {{range $key, $value := .}}
+        <li>{{$key}}: {{$value.Url}} - ${{$value.Expiration}}</li>
+    {{end}}
+</ul>
+{{template "footer"}}
+
+{{ end }}
