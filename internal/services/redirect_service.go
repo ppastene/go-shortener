@@ -21,10 +21,10 @@ func NewShortenerService(cache cache.Cache, cfg config.Config) *ShortenerService
 	}
 }
 
-func (se ShortenerService) GetUrl(key string) (domain.Rediect, error) {
+func (se ShortenerService) GetUrl(key string) (domain.Redirect, error) {
 	shortenedUrl, err := se.cache.Get(key)
 	if err != nil {
-		return domain.Rediect{}, err
+		return domain.Redirect{}, err
 	}
 	return shortenedUrl, nil
 }
@@ -33,7 +33,7 @@ func (se ShortenerService) SaveUrl(key, url string) error {
 	if se.isShortcodeExists(key) {
 		return errors.New("Key already exists")
 	}
-	shortenedUrl := domain.Rediect{
+	shortenedUrl := domain.Redirect{
 		Url:        url,
 		Expiration: time.Now().Add(time.Second * time.Duration(se.cfg.ExpirationTime)),
 	}
@@ -41,13 +41,13 @@ func (se ShortenerService) SaveUrl(key, url string) error {
 	return nil
 }
 
-func (se ShortenerService) ListShortcodes() map[string]domain.Rediect {
+func (se ShortenerService) ListShortcodes() map[string]domain.Redirect {
 	return se.cache.List()
 }
 
 func (se ShortenerService) isShortcodeExists(key string) bool {
 	shortenedUrl, _ := se.cache.Get(key)
-	if (shortenedUrl == domain.Rediect{}) {
+	if (shortenedUrl == domain.Redirect{}) {
 		return false
 	}
 	return true
