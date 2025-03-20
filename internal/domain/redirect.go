@@ -2,7 +2,7 @@ package domain
 
 import "time"
 
-type Rediect struct {
+type Redirect struct {
 	Url        string
 	Expiration time.Time
 }

@@ -5,8 +5,8 @@ import (
 )
 
 type Cache interface {
-	Get(key string) (domain.Rediect, error)
-	Set(key string, shortenerUrl domain.Rediect)
+	Get(key string) (domain.Redirect, error)
+	Set(key string, shortenerUrl domain.Redirect)
 	Delete(key string)
-	List() map[string]domain.Rediect
+	List() map[string]domain.Redirect
 }
